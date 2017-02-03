@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class Ship {
 	private String registryNumber;
 	private Date launchDate;
 
-	@OneToMany(mappedBy = "ship")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ship")
 	private List<CrewMember> crewMembers = new ArrayList<>();
 
 	public int getId() {
@@ -52,6 +53,14 @@ public class Ship {
 
 	public void setLaunchDate(Date launchDate) {
 		this.launchDate = launchDate;
+	}
+
+	public List<CrewMember> getCrewMembers() {
+		return crewMembers;
+	}
+
+	public void setCrewMembers(List<CrewMember> crewMembers) {
+		this.crewMembers = crewMembers;
 	}
 
 	@Override

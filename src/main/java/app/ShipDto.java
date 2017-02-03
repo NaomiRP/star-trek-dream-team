@@ -5,8 +5,8 @@ import java.util.List;
 
 public class ShipDto extends AbstractNamedDto {
 	private String registryNumber;
-	private List<String> crewNames;
-	private List<CrewMemberDto> crewMembers;
+	private List<String> crewNames; // used for requests
+	private List<CrewMemberDto> crewMembers; // used for responses
 
 	public String getRegistryNumber() {
 		return registryNumber;
