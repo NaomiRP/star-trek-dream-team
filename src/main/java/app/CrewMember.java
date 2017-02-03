@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -19,6 +20,10 @@ public class CrewMember {
 	private String name;
 	private Date academyGraduationDate;
 	private String team;
+
+	@ManyToOne
+	private Ship ship;
+	private boolean captain = false;
 
 	@Transient
 	private Integer yearsOfService;
@@ -60,6 +65,22 @@ public class CrewMember {
 
 	public void setTeam(String team) {
 		this.team = team;
+	}
+
+	public Ship getShip() {
+		return ship;
+	}
+
+	public void setShip(Ship ship) {
+		this.ship = ship;
+	}
+
+	public boolean isCaptain() {
+		return captain;
+	}
+
+	public void setCaptain(boolean captain) {
+		this.captain = captain;
 	}
 
 	public Integer getYearsOfService() {
