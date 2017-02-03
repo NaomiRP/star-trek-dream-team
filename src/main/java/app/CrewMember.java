@@ -1,8 +1,5 @@
 package app;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 @Entity
 public class CrewMember {
@@ -24,9 +20,6 @@ public class CrewMember {
 	@ManyToOne
 	private Ship ship;
 	private boolean captain = false;
-
-	@Transient
-	private Integer yearsOfService;
 
 	public int getId() {
 		return id;
@@ -52,13 +45,6 @@ public class CrewMember {
 		this.academyGraduationDate = academyGraduationDate;
 	}
 
-	private LocalDate getLocalAcademyGraduationDate() {
-		Calendar graduation = Calendar.getInstance();
-		graduation.setTime(academyGraduationDate);
-		return LocalDate.of(graduation.get(Calendar.YEAR), graduation.get(Calendar.MONTH),
-				graduation.get(Calendar.DAY_OF_MONTH));
-	}
-
 	public String getTeam() {
 		return team;
 	}
@@ -81,18 +67,6 @@ public class CrewMember {
 
 	public void setCaptain(boolean captain) {
 		this.captain = captain;
-	}
-
-	public Integer getYearsOfService() {
-		if (yearsOfService == null) {
-			Period serviceTime = getLocalAcademyGraduationDate().until(LocalDate.now());
-			yearsOfService = serviceTime.getYears();
-		}
-		return yearsOfService;
-	}
-
-	public void setYearsOfService(Integer yearsOfService) {
-		this.yearsOfService = yearsOfService;
 	}
 
 	@Override

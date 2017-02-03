@@ -1,8 +1,10 @@
 package app;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CrewMemberDto extends AbstractNamedDto {
+	private Integer yearsOfService;
 	private String team;
 	private String shipRegistryNumber;
 	private Boolean captain;
@@ -13,6 +15,12 @@ public class CrewMemberDto extends AbstractNamedDto {
 
 	public void setTeam(String team) {
 		this.team = team;
+	}
+
+	public Integer getYearsOfService() {
+		if (yearsOfService == null & date != null)
+			yearsOfService = getLocalDate().until(LocalDate.now()).getYears();
+		return yearsOfService;
 	}
 
 	public Date getAcademyGraduationDate() {
